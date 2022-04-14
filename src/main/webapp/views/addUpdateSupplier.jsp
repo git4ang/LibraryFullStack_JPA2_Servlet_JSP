@@ -3,7 +3,7 @@
     <label for="idSupplier">ID Supplier</label>
     <input type="number" class="form-control" id="idSupplier" aria-describedby="idHelp" placeholder="This field is automatic, without entering anything." 
     		name="idSupplier" value="${ supplier.idSupplier }" readonly="readonly">
-    <small id="idHelp" class="form-text text-muted">ID should to be unique.</small>
+    <small id="idHelp" class="form-text text-muted">ID must be unique.</small>
   </div>
   
   <div class="form-group">

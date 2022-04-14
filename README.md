@@ -11,3 +11,9 @@ Project programmed in Java 2E and based in **JPA2 technology with Servlet & JSP*
   
   - JPA2, JDBC, MySQL, Maven, Git, JSP, Servlet, Lombok, Log4J 
   - IDE: Intellij IDEA
+
+  #### Note:
+  - Before starting the project, you must create: 
+    - The database (library_db).
+    - The tables (book_tb, supplier_tb, ordered_tb).
+    
