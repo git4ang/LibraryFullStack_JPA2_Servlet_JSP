@@ -1,4 +1,4 @@
-Project programmed in Java 2E and based in JPA2 technology with Servlet & JSP:
+Project programmed in Java 2E and based in **JPA2 technology with Servlet & JSP**:
 
   - [x] Creation entities models (Book, Supplier, Ordered)
   - [x] Creation index.jsp
@@ -7,7 +7,7 @@ Project programmed in Java 2E and based in JPA2 technology with Servlet & JSP:
   - [x] Creation CrudMetier class.
   - [x] Creation Servlet Class.
 
-  ###Technologies:
+  ### Technologies:
   
   - JPA2, JDBC, MySQL, Maven, Git, JSP, Servlet, Lombok, Log4J 
   - IDE: Intellij IDEA
