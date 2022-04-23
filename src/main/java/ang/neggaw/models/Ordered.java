@@ -31,7 +31,6 @@ public class Ordered implements Serializable {
     @NonNull
     private long idSupplier;
 
-    @NonNull
     private String datePurchase;
 
     @NonNull

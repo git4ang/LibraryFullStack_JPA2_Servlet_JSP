@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ang.neggaw.connections.MyConnectionDB;
 import ang.neggaw.models.Book;
@@ -39,7 +40,7 @@ public class LibraryMetier {
     private boolean addedUpdated = false;
 
     // methods privates
-    public void getDataTable(String tableName, String query, String mc) {
+    public void getDataTable(String tableName, String query, String mc, String like01, String like02) throws Exception {
 
         ResultSetMetaData metaData;
         String[] columnsName;
@@ -54,7 +55,7 @@ public class LibraryMetier {
                 rs = st.executeQuery(query);
             } else {
                 stmt = cn.prepareStatement(query);
-                stmt.setString(1, "%" + mc + "%");
+                stmt.setString(1, like01 + mc + like02);
                 rs = stmt.executeQuery();
             }
 
@@ -69,9 +70,9 @@ public class LibraryMetier {
                     listSuppliers.add(supplier);
                 }
                 else if(tableName.toLowerCase().startsWith("boo")) {
-                    book = new Book(rs.getLong(columnsName[1]), rs.getString(columnsName[2]),
-                            rs.getString(columnsName[3]), rs.getInt(columnsName[4]), rs.getString(columnsName[5]),
-                            rs.getString(columnsName[6]), rs.getDouble(columnsName[8]));
+                    book = new Book(rs.getLong(columnsName[1]), rs.getString(columnsName[2]), rs.getString(columnsName[3]),
+                            rs.getInt(columnsName[4]), rs.getString(columnsName[5]), rs.getString(columnsName[6]),
+                            rs.getDouble(columnsName[7]));
                     book.setIdBook(rs.getLong(columnsName[0]));
                     listBooks.add(book);
                 }
@@ -79,9 +80,10 @@ public class LibraryMetier {
                     book = new Book();
                     supplier = new Supplier();
                     ordered = new Ordered(rs.getLong(columnsName[1]),
-                            rs.getInt(columnsName[4]), rs.getString(columnsName[7]), rs.getDouble(columnsName[8]),
+                            rs.getInt(columnsName[4]), rs.getDouble(columnsName[8]),
                             rs.getInt(columnsName[9]));
                     ordered.setIdOrdered(rs.getLong(columnsName[0]));
+                    ordered.setDatePurchase(rs.getString(columnsName[7]));
                     book.setAuthor(rs.getString(columnsName[2]));
                     book.setEditor(rs.getString(columnsName[3]));
                     ordered.setBook(book);
@@ -92,12 +94,11 @@ public class LibraryMetier {
                 }
             }
         } catch (Exception e) {
-            log.error("Error display table '{}'. {}", tableName, e.getMessage());
-            //e.printStackTrace();
+            throw new Exception("Error display table '" + tableName + "'." + e.getMessage());
         }
     }
 
-    public void addUpdateDataToTable(String tableName, String query, String addUpdate) {
+    public void addUpdateDataToTable(String tableName, String query, String addUpdate) throws Exception {
 
         try (Connection cn = MyConnectionDB.getCn(); PreparedStatement stmt = cn.prepareStatement(query)){
             if(tableName.toLowerCase().startsWith("supp")) {
@@ -130,27 +131,64 @@ public class LibraryMetier {
                 stmt.setString(3, ordered.getDatePurchase());
                 stmt.setDouble(4, ordered.getPrice());
                 stmt.setInt(5, ordered.getNbr_copies());
-
-                if(stmt.executeUpdate() > 0) {
-                    log.info("The Ordered with idSupplier: '{}' and idBook: '{}' created successfully",
-                            ordered.getIdSupplier(), ordered.getIdBook());
-                    this.addedUpdated = true;
-                }
+                if(addUpdate.equals("update"))
+                    stmt.setLong(6, ordered.getIdOrdered());
+                stmt.executeUpdate();
+                this.addedUpdated = true;
             }
         } catch (Exception e) {
-            log.error("Error ADDing data to table: '{}'. {}", tableName, e.getMessage());
+            throw new Exception("Error adding/updating data table: '" + tableName + "'. " + e.getMessage());
         }
     }
 
-    public boolean deleteTableById(String tableName, String query, long idTable) {
+    public boolean deleteTableById(String tableName, String query, long idTable) throws Exception {
 
         try (Connection cn = MyConnectionDB.getCn(); PreparedStatement stmt = cn.prepareStatement(query)){
             stmt.setLong(1, idTable);
             if(stmt.executeUpdate() > 0)
                 return true;
         } catch (Exception e) {
-            log.error("Error in DELETE table: '{}'. {}", tableName, e.getMessage());
+            throw new Exception("Error DELETING table: '" + tableName + "' with ID: " + idTable + ".\n" + e.getMessage());
         }
         return false;
+    }
+
+    private boolean verifyFieldsErrors(String fieldName, String regex) {
+        return !fieldName.matches(regex);
+    }
+
+    public void getFieldsErrorsBook(Map<String, String> fieldsErrorsMessage) {
+        if(verifyFieldsErrors(String.valueOf(book.getIsbn()), "\\d{1,10}"))
+            fieldsErrorsMessage.put("isbn", "Format incorrect. Nombre max 10 digits et positif ex. 1234567800");
+        if(verifyFieldsErrors(book.getTitle(), "[\\w ]+"))
+            fieldsErrorsMessage.put("title", "Format incorrect. Alphanumeric ex. 1984, 'Harry Potter'");
+        if(verifyFieldsErrors(book.getTheme(), "[A-Za-z ]{3,20}"))
+            fieldsErrorsMessage.put("theme", "Format incorrect. Des lettres et pas numéros ex. Thriller");
+        if(verifyFieldsErrors(String.valueOf(book.getNbr_pages()), "\\d+"))
+            fieldsErrorsMessage.put("pages", "Format incorrect. Nombre positif ex. 400");
+        if(verifyFieldsErrors(book.getAuthor(), "[A-Za-z ]{3,20}"))
+            fieldsErrorsMessage.put("auteur", "Format incorrect. Des lettres et pas de numéros ex. 'Harlen Coben'");
+        if(verifyFieldsErrors(book.getEditor(), "^[A-Za-z]{3,20}[\\w_ ]+"))
+            fieldsErrorsMessage.put("editeur", "Format incorrect. Des lettres et pas de numérs ex. Pocket");
+        if(verifyFieldsErrors(String.valueOf(book.getPrice()), "\\d+\\.\\d{1,4}"))
+            fieldsErrorsMessage.put("price", "Format incorrect. Numérique avec max 4 décimals ex. nnn.dd");
+    }
+
+    public void getFieldsErrorsSupplier(Map<String, String> fieldsErrorsMessage) {
+        if(verifyFieldsErrors(supplier.getSocial_reason(), "[\\w ]+"))
+            fieldsErrorsMessage.put("social_reason", "Format incorrect. Ex. Cultural");
+        if(verifyFieldsErrors(supplier.getCity(), "[A-Za-z ]+"))
+            fieldsErrorsMessage.put("city", "Format incorrect. Ex. Toulon");
+        if(verifyFieldsErrors(supplier.getPhone(), "^[+][\\d]+"))
+            fieldsErrorsMessage.put("phone", "Format incorrect. Ex. +3371236945");
+        if(verifyFieldsErrors(supplier.getEmail(), "^[A-Za-z\\d._%+-]+@[A-Za-z\\d.-]+\\.[A-Za-z]{2,6}$"))
+            fieldsErrorsMessage.put("email", "Format incorrect. Ex. blabla@email.bla");
+    }
+
+    public void getFieldsErrorsOrdered(Map<String, String> fieldsErrorsMessage) {
+        if(verifyFieldsErrors(String.valueOf(ordered.getPrice()), "\\d+\\.\\d{1,4}"))
+            fieldsErrorsMessage.put("price", "Format incorrect. Nombre positif avec max 4 décimals ex. nnn.dddd");
+        if(verifyFieldsErrors(String.valueOf(ordered.getNbr_copies()), "\\d+"))
+            fieldsErrorsMessage.put("copies", "Format incorrect. Nombre positif ex. 11");
     }
 }
