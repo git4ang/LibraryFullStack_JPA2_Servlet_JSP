@@ -6,10 +6,12 @@ Project programmed in Java 2E and based in **JPA2 technology with Servlet & JSP*
   - [x] Creation MyConnectionDB class.
   - [x] Creation CrudMetier class.
   - [x] Creation Servlet Class.
+  - [x] Validation of errors
+  - [x] Implementation of MVC Pattern
 
   ### Technologies:
   
-  - JPA2, JDBC, MySQL, Maven, Git, JSP, Servlet, Lombok, Log4J 
+  - JPA2, JDBC, MySQL, Maven, Git, JSP, Servlet, Lombok, Log4J2, Tomcat 
   - IDE: Intellij IDEA
 
   #### Note:
