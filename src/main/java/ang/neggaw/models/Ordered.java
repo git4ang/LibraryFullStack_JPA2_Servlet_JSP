@@ -15,6 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Builder
+@ToString
 public class Ordered implements Serializable {
 
     /**
@@ -41,18 +43,4 @@ public class Ordered implements Serializable {
 
     private Book book;
     private Supplier supplier;
-
-    @Override
-    public String toString() {
-        return "Ordered{" +
-                "idOrdered=" + idOrdered +
-                ", idBook=" + idBook +
-                ", idSupplier=" + idSupplier +
-                ", datePurchase='" + datePurchase + '\'' +
-                ", price=" + price +
-                ", nbr_copies=" + nbr_copies +
-                ", book=" + book +
-                ", supplier=" + supplier +
-                '}';
-    }
 }

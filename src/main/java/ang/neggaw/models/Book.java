@@ -15,6 +15,8 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@ToString
 public class Book implements Serializable{
 
     /**
@@ -46,18 +48,4 @@ public class Book implements Serializable{
 
     @NonNull
     private double price;
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "idBook=" + idBook +
-                ", isbn=" + isbn +
-                ", title='" + title + '\'' +
-                ", theme='" + theme + '\'' +
-                ", nbr_pages=" + nbr_pages +
-                ", author='" + author + '\'' +
-                ", editor='" + editor + '\'' +
-                ", price=" + price +
-                '}';
-    }
 }

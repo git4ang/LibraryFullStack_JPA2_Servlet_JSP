@@ -2,6 +2,7 @@ package ang.neggaw.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * author by: ANG
@@ -25,16 +26,21 @@ public class MyConnectionDB {
         }
     }
 
-    public static Connection getCn() {
-        if(cn == null) new MyConnectionDB();
-        else
-            try {
-                if (cn.isClosed()) new MyConnectionDB();
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Error Close connection: " + e.getMessage());
-            }
+    public static Connection getCn() throws Exception {
+        try {
+            if (cn == null || cn.isClosed()) new MyConnectionDB();
+        } catch (Exception e) {
+            throw new Exception("Error Close connection: " + e.getMessage());
+        }
         return cn;
+    }
+
+    public static void getCloseCn() {
+        try {
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

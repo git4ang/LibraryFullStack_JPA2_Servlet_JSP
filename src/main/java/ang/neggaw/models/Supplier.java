@@ -2,6 +2,7 @@ package ang.neggaw.models;
 
 import lombok.*;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -14,11 +15,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Builder
+@ToString
 public class Supplier implements Serializable {
 
     /**
      *
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
 
@@ -35,15 +39,4 @@ public class Supplier implements Serializable {
 
     @NonNull
     private String email;
-
-    @Override
-    public String toString() {
-        return "Supplier{" +
-                "idSupplier=" + idSupplier +
-                ", social_reason='" + social_reason + '\'' +
-                ", city='" + city + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
