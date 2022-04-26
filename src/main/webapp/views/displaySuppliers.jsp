@@ -17,7 +17,7 @@
 	<c:forEach items="${listSuppliers}" var="p">
 		<tr>
 			<c:if test="${ selectSupplier }">
-				<td><a href="ang?mvc=addOrdered&idSupplier=${p.idSupplier}">${p.idSupplier}</a></td>
+				<td><a href="orders?mvc=addOrdered&idSupplier=${p.idSupplier}">${p.idSupplier}</a></td>
 			</c:if>
 			<c:if test="${ !selectSupplier }">
 				<td style="color: red; font-weight: bold">${p.idSupplier}</td>
@@ -28,13 +28,13 @@
 			<td>${p.email}</td>
 			<c:if test="${ !selectSupplier }">
 				<td>
-					<a href="ang?mvc=updateSupplier&idSupplier=${p.idSupplier}">
+					<a href="suppliers?mvc=updateSupplier&idSupplier=${p.idSupplier}">
 						<button type="button" class="btn btn-primary">Update</button>	
 					</a>
 				</td>
 				<td>
 					<a style="color: red;" onclick="return confirm('Are you sure you want to DELETE this Supplier: ${p.social_reason} ?');"
-								href="ang?mvc=deleteSupplier&idSupplier=${p.idSupplier}">
+								href="suppliers?mvc=deleteSupplier&idSupplier=${p.idSupplier}">
 						<button type="button" class="btn btn-danger">Delete</button>
 					</a>
 				</td>

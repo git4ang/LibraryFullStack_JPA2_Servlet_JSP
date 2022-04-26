@@ -21,7 +21,7 @@
 			<tr>
 				<c:if test="${ selectBook }">
 					<td>
-						<a href="ang?mvc=addOrdered&idBook=${b.idBook}">${b.idBook}</a>
+						<a href="orders?mvc=addOrdered&idBook=${b.idBook}">${b.idBook}</a>
 					</td>
 				</c:if>
 				<c:if test="${ !selectBook }">
@@ -36,13 +36,13 @@
 				<td>${b.price}</td>
 				<c:if test="${! selectBook }">
 					<td>
-						<a style="color: orange;" href="ang?mvc=updateBook&idBook=${b.idBook}">
+						<a style="color: orange;" href="books?mvc=updateBook&idBook=${b.idBook}">
 							<button type="button" class="btn btn-primary">Update</button>
 						</a>
 					</td>
 					<td>
 						<a onclick="return confirm('Are you sure you want to DELETE this Book: ${b.title} ?');"
-									href="ang?mvc=deleteBook&idBook=${b.idBook}">
+									href="books?mvc=deleteBook&idBook=${b.idBook}">
 							<button type="button" class="btn btn-danger">Delete</button>
 						</a>
 					</td>

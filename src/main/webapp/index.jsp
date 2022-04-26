@@ -20,17 +20,17 @@
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Display</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="ang?display=books">List of books</a>
-                        <a class="dropdown-item" href="ang?display=suppliers">List of suppliers</a>
-                        <a class="dropdown-item" href="ang?display=orders">List of orders</a>
+                        <a class="dropdown-item" href="books?display=books">List of books</a>
+                        <a class="dropdown-item" href="suppliers?display=suppliers">List of suppliers</a>
+                        <a class="dropdown-item" href="orders?display=orders">List of orders</a>
                     </div>
                 </div>
                 <div class="dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADD</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="ang?mvc=addBook">ADD a Book</a>
-                        <a class="dropdown-item" href="ang?mvc=addSupplier">ADD a Supplier</a>
-                        <a class="dropdown-item" href="ang?mvc=addOrdered">ADD a Ordered</a>
+                        <a class="dropdown-item" href="books?mvc=addBook">ADD a Book</a>
+                        <a class="dropdown-item" href="suppliers?mvc=addSupplier">ADD a Supplier</a>
+                        <a class="dropdown-item" href="orders?mvc=addOrdered">ADD a Ordered</a>
                     </div>
                 </div>
 

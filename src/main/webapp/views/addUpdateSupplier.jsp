@@ -4,7 +4,7 @@
   }
 </style>
 
-<form method="post" action="${ updateSupplier ? 'ang?mvc=updateSupplier' : 'ang?mvc=addSupplier' }">
+<form method="post" action="${ updateSupplier ? 'suppliers?mvc=updateSupplier' : 'suppliers?mvc=addSupplier' }">
   <div class="form-group">
     <label for="idSupplier">ID Supplier</label>
     <input type="number" class="form-control" id="idSupplier" aria-describedby="idHelp" placeholder="This field is automatic, without entering anything."
