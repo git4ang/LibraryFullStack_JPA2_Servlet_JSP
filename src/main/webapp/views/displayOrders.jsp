@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<a href="ang?mvc=addOrdered">
+<a href="orders?mvc=addOrdered">
 	<button type="button" class="btn btn-primary btn-block">ADD Ordered</button>
 </a>
 
@@ -33,13 +33,13 @@
 			<td>${o.price}</td>
 			<td>${o.nbr_copies}</td>
 			<td>
-				<a style="color: orange;" href="ang?mvc=updateOrdered&idOrdered=${o.idOrdered}">
+				<a style="color: orange;" href="orders?mvc=updateOrdered&idOrdered=${o.idOrdered}">
 					<button type="button" class="btn btn-primary">Update</button>
 				</a>
 			</td>
 			<td>
 				<a onclick="return confirm('Are you sure you want to DELETE this ORDERED: ${o.idOrdered} ?');"
-				   href="ang?mvc=deleteOrdered&idOrdered=${o.idOrdered}">
+				   href="orders?mvc=deleteOrdered&idOrdered=${o.idOrdered}">
 					<button type="button" class="btn btn-danger">Delete</button>
 				</a>
 			</td>

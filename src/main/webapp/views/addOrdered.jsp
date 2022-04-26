@@ -4,7 +4,7 @@
   }
 </style>
 
-<form method="post" action="${updateOrdered ? 'ang?mvc=updateOrdered' : 'ang?mvc=addOrdered'}">
+<form method="post" action="${updateOrdered ? 'orders?mvc=updateOrdered' : 'orders?mvc=addOrdered'}">
     <div class="form-group">
         <label for="idOrdered">ID Book</label>
         <input type="number" class="form-control" id="idOrdered" name="idOrdered" value="${ ordered.idOrdered }" readonly="readonly">

@@ -95,19 +95,19 @@ public class BookService {
 
     public void getFieldsErrorsBook() {
         fieldsErrorsMessage = new HashMap<>();
-        if(String.valueOf(book.getIsbn()).matches("\\d{1,10}"))
+        if(!String.valueOf(book.getIsbn()).matches("\\d{1,10}"))
             fieldsErrorsMessage.put("isbn", "Format ISBN incorrect. Nombre max 10 digits et positif ex. 1234567800");
-        if(book.getTitle().matches("[\\w ]+"))
+        if(!book.getTitle().matches("[\\w ]+"))
             fieldsErrorsMessage.put("title", "Format Title incorrect. Alphanumeric ex. 1984, 'Harry Potter'");
-        if(book.getTheme().matches("[A-Za-z ]{3,20}"))
+        if(!book.getTheme().matches("[A-Za-z ]{3,20}"))
             fieldsErrorsMessage.put("theme", "Format Theme incorrect. Des lettres et pas numéros ex. Thriller");
-        if(String.valueOf(book.getNbr_pages()).matches("\\d+"))
+        if(!String.valueOf(book.getNbr_pages()).matches("\\d+"))
             fieldsErrorsMessage.put("pages", "Format Pages incorrect. Nombre positif ex. 400");
-        if(book.getAuthor().matches("[A-Za-z ]{3,20}"))
+        if(!book.getAuthor().matches("[A-Za-z ]{3,20}"))
             fieldsErrorsMessage.put("auteur", "Format Auteur incorrect. Des lettres et pas de numéros ex. 'Harlen Coben'");
-        if(book.getEditor().matches("^[A-Za-z]{3,20}[\\w_ ]+"))
+        if(!book.getEditor().matches("^[A-Za-z]{3,20}[\\w_ ]+"))
             fieldsErrorsMessage.put("editeur", "Format Editeur incorrect. Des lettres et pas de numérs ex. Pocket");
-        if(String.valueOf(book.getPrice()).matches("\\d+\\.\\d{1,4}"))
+        if(!String.valueOf(book.getPrice()).matches("\\d+\\.\\d{1,4}"))
             fieldsErrorsMessage.put("price", "Format Price incorrect. Numérique avec max 4 décimals ex. nnn.dd");
     }
 }

@@ -118,6 +118,7 @@ public class BookServlet extends HttpServlet {
                     /**
                      *  Verify if there are errors in the fields.
                      */
+                    bookService.getFieldsErrorsBook();
                     if(!bookService.getFieldsErrorsMessage().isEmpty()) {
                         request.setAttribute("fieldsErrorsBook", bookService.getFieldsErrorsMessage());
                         request.setAttribute("book", bookService.getBook());
@@ -150,6 +151,7 @@ public class BookServlet extends HttpServlet {
                     /**
                      *  Verifying if there are errors in the fields.
                      */
+                    bookService.getFieldsErrorsBook();
                     if(!bookService.getFieldsErrorsMessage().isEmpty()) {
                         request.setAttribute("fieldsErrorsBook", bookService.getFieldsErrorsMessage());
                         request.setAttribute("updateBook", true);

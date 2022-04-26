@@ -35,26 +35,26 @@
                 </div>
 
                 <c:if test="${ !empty listBooks || !empty listSuppliers || !empty listOrders }">
-                    <form action="search?mvc=select" class="form-inline my-2 my-lg-0 ml-0">
+                    <form class="form-inline my-2 my-lg-0 ml-0">
                         <c:if test="${ ! empty listBooks }">
                             <select name="searchBy" id="book" class="form-control">
-                                <option value="theme__boo">Theme</option>
-                                <option value="author__boo">Author</option>
-                                <option value="editor__boo">Editor</option>
+                                <option value="theme">Theme</option>
+                                <option value="author">Author</option>
+                                <option value="editor">Editor</option>
                             </select>
                         </c:if>
                         <c:if test="${ ! empty listSuppliers }">
                             <select name="searchBy" id="supplier" class="form-control">
-                                <option value="social_reason__sup">Social reason</option>
-                                <option value="city__sup">City</option>
-                                <option value="country__sup">Country</option>
+                                <option value="social_reason">Social reason</option>
+                                <option value="city">City</option>
+                                <option value="country">Country</option>
                             </select>
                         </c:if>
                         <c:if test="${ ! empty listOrders }">
                             <select name="searchBy" id="ordered" class="form-control">
-                                <option value="social_reason__ord">Social raison</option>
-                                <option value="author__ord">Author</option>
-                                <option value="editor__ord">Editor</option>
+                                <option value="social_reason">Social raison</option>
+                                <option value="author">Author</option>
+                                <option value="editor">Editor</option>
                             </select>
                         </c:if>
                         <input class="form-control mr-sm-2" name="searchedName" type="search" placeholder="Search..." aria-label="Search">
